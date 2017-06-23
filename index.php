@@ -4,10 +4,11 @@
 	define("PORT",3306);
 	define("DATABASE","");
 
-	// error_reporting(0);
+	error_reporting(0);
 	define('PASSWORD_MAX_LEN',11); // The maximum length of the combination to be tried
-	define("TRY_ALL", true);
+	define("TRY_ALL", false);
 
+	// remove according to usage.
 	$token = array('a','A','1','*'); // What to be included in the combinations : 
 	/*
 		'a' : small alphabets

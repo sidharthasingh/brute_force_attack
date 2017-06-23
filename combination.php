@@ -44,6 +44,7 @@
 
 	function start_crack()
 	{
+		global $tokenLength,$tokens;
 		$max=PASSWORD_MAX_LEN;
 		if(TRY_ALL)
 			$max=1;
