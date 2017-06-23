@@ -5,11 +5,11 @@
 	define("DATABASE","");
 
 	error_reporting(0);
-	define('PASSWORD_MAX_LEN',11); // The maximum length of the combination to be tried
+	define('PASSWORD_MAX_LEN',4); // The maximum length of the combination to be tried
 	define("TRY_ALL", false);
 
 	// remove according to usage.
-	$token = array('a','A','1','*'); // What to be included in the combinations : 
+	$token = array('a'); // What to be included in the combinations : 
 	/*
 		'a' : small alphabets
 		'A' : capital alphabets
