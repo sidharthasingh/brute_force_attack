@@ -33,9 +33,13 @@
 		global $tokens,$tokenLength;
 		if(strlen($str)==$maxlen)
 		{
-			echo "$str\n";
 			if(check($str))
+			{
+				echo "PASS : $str\n";
 				exit;
+			}
+			else
+				echo "FAIL : $str\n";
 		}
 		else
 			for($i=0;$i<$tokenLength;$i++)
